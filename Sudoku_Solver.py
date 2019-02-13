@@ -18,7 +18,6 @@ class SudokuSolver:
         self.grid_list = []
         self.grid_list.append(np.copy(self.sudo_grid))
 
-
     def print_grid(self):
         """
         Print Sudo_grid in a human readable form
@@ -41,15 +40,11 @@ class SudokuSolver:
         :param number: number to be added
         :return:
         """
-        for i in self.sudo_grid[:, pos[1]]:
-            if number == i:
-                return False
 
-        for j in self.sudo_grid[pos[0], :]:
-            if number == j:
-                return False
-
-        return True
+        if np.all(self.sudo_grid[:, pos[1]] != number) and np.all(self.sudo_grid[pos[0], :] != number):
+            return True
+        else:
+            return False
 
     def check_square(self, pos: list, number: int) -> bool:
         """
@@ -156,10 +151,10 @@ class SudokuSolver:
 
 """
 
-starting_grid = np.array([[1,0,5,0,2,7,6,9,8],
-                        [8,0,9,0,5,4,1,2,7],
-                        [6,7,2,9,1,8,5,4,3],
-                        [4,0,6,1,0,5,3,7,2],
+starting_grid = np.array([[1,0,5,0,2,0,6,9,8],
+                        [8,0,9,0,5,4,0,2,7],
+                        [6,7,0,0,1,0,5,4,3],
+                        [4,0,0,1,0,5,3,7,2],
                         [0,1,0,0,7,0,9,0,6],
                         [0,5,3,2,9,6,4,8,1],
                         [0,6,0,5,0,2,8,1,9],
